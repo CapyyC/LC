@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<info>
+  <name>Archipelago Randomizer 0.1.0</name>
+  <descs>
+    <desc>Connects Lobotomy Corporation to an Archipelago multiworld.</desc>
+    <desc />
+    <desc>Abnormalities, E.G.O equipment, research (bullets, shields,</desc>
+    <desc>Rabbit Team...), agent slots and resources are shuffled into</desc>
+    <desc>the multiworld. Observation levels, E.G.O extraction, cleared</desc>
+    <desc>days, Sephirah missions and Core Suppressions are checks.</desc>
+    <desc />
+    <desc>Run the "Lobotomy Corporation Client" from the Archipelago</desc>
+    <desc>Launcher before starting the game. F8: overlay, F9: diagnostics.</desc>
+  </descs>
+</info>

@@ -1,0 +1,13 @@
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# .NET build output
+bin/
+obj/
+*.user
+.vs/
+
+# Created by the mod on first run
+mod/LobotomyArchipelago/config.json

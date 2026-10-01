@@ -1,0 +1,4 @@
+{
+    "_comment": "Copy to research_overrides.json to force the game research id used for a research item. Use F9 in game to list research ids. Keys are the in-game research names sent by the apworld.",
+    "Physical Intervention Shield": -1
+}

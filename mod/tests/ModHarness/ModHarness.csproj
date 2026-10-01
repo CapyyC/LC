@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Offline test driver for the mod: loads LobotomyArchipelago.dll (net35) with the simulated game and Harmony 2. -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <NoWarn>NU1702;MSB3277</NoWarn>
+    <RollForward>Major</RollForward>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Lib.Harmony" Version="2.3.3" />
+    <ProjectReference Include="..\FakeGame\FakeGame.csproj" />
+    <Reference Include="LobotomyArchipelago">
+      <HintPath>..\..\LobotomyArchipelago\bin\Release\LobotomyArchipelago.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine">
+      <HintPath>..\..\stubs\UnityEngine\bin\Release\net35\UnityEngine.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <!-- Build the mod (against the UnityEngine stub) first so the references above exist. -->
+  <Target Name="BuildMod" BeforeTargets="ResolveAssemblyReferences">
+    <MSBuild Projects="..\..\LobotomyArchipelago\LobotomyArchipelago.csproj" Properties="Configuration=Release;GameDir=;MSBuildRestoreSessionId=$([System.Guid]::NewGuid())" Targets="Restore" />
+    <MSBuild Projects="..\..\LobotomyArchipelago\LobotomyArchipelago.csproj" Properties="Configuration=Release;GameDir=" Targets="Build" />
+  </Target>
+</Project>

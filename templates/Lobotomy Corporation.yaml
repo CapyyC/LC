@@ -1,0 +1,419 @@
+﻿# Q. What is this file?
+# A. This file contains options which allow you to configure your multiworld experience while allowing
+#    others to play how they want as well.
+#
+# Q. How do I use it?
+# A. The options in this file are weighted. This means the higher number you assign to a value, the
+#    more chances you have for that option to be chosen. For example, an option like this:
+#
+#    map_shuffle:
+#      on: 5
+#      off: 15
+#
+#    Means you have 5 chances for map shuffle to occur, and 15 chances for map shuffle to be turned
+#    off.
+#
+# Q. I've never seen a file like this before. What characters am I allowed to use?
+# A. This is a .yaml file. You are allowed to use most characters.
+#    To test if your yaml is valid or not, you can use this website:
+#        http://www.yamllint.com/
+#    You can also verify that your Archipelago options are valid at this site:
+#        https://archipelago.gg/check
+
+# Your name in-game, limited to 16 characters.
+#     {player} will be replaced with the player's slot number.
+#     {PLAYER} will be replaced with the player's slot number, if that slot number is greater than 1.
+#     {number} will be replaced with the counter value of the name.
+#     {NUMBER} will be replaced with the counter value of the name, if the counter value is greater than 1.
+name: Player{number}
+
+# Used to describe your yaml. Useful if you have multiple files.
+description: Default Lobotomy Corporation Template
+
+game: Lobotomy Corporation
+requires:
+  version: 0.6.8 # Version of Archipelago required for this yaml to work as expected.
+  game:
+    Lobotomy Corporation: 0.1.0 # Version of the world required for this yaml to work as expected.
+
+Lobotomy Corporation:
+  ################
+  # Game Options #
+  ################
+  progression_balancing:
+    # A system that can move progression earlier, to try and prevent the player from getting stuck and bored early.
+    # 
+    # A lower setting means more getting stuck. A higher setting means less getting stuck.
+    #
+    # You can define additional values between the minimum and maximum values.
+    # Minimum value is 0
+    # Maximum value is 99
+    random: 0
+    random-low: 0 # random value weighted towards lower values
+    random-high: 0 # random value weighted towards higher values
+    random-range-0-99: 0 # random value between 0 and 99
+    disabled: 0 # equivalent to 0
+    normal: 50 # equivalent to 50
+    extreme: 0 # equivalent to 99
+
+  accessibility:
+    # Set rules for reachability of your items/locations.
+    # 
+    # **Full:** ensure everything can be reached and acquired.
+    # 
+    # **Minimal:** ensure what is needed to reach your goal can be acquired.
+    full: 50
+    minimal: 0
+
+  ########
+  # Goal #
+  ########
+  goal_day:
+    # The day you have to clear to finish your game.
+    # 
+    # Day 50 is the true ending and requires every Core Suppression (the game itself demands them on days 47-49).
+    # Locations that would only become available after this day are not created.
+    #
+    # You can define additional values between the minimum and maximum values.
+    # Minimum value is 5
+    # Maximum value is 50
+    25: 50
+    random: 0
+    random-low: 0 # random value weighted towards lower values
+    random-high: 0 # random value weighted towards higher values
+    random-range-5-50: 0 # random value between 5 and 50
+
+  required_core_suppressions:
+    # How many Sephirah Core Suppressions must be completed (in addition to clearing the goal day) to finish.
+    # 
+    # Upper layer suppressions need a goal day of at least 29-30, middle layer 40 and lower layer 44. The value is
+    # lowered automatically if your goal day does not leave room for that many suppressions.
+    #
+    # You can define additional values between the minimum and maximum values.
+    # Minimum value is 0
+    # Maximum value is 9
+    0: 50
+    random: 0
+    random-low: 0 # random value weighted towards lower values
+    random-high: 0 # random value weighted towards higher values
+    random-range-0-9: 0 # random value between 0 and 9
+
+  #################
+  # Abnormalities #
+  #################
+  starting_abnormalities:
+    # How many abnormalities you start with. The first day needs one, every other extraction day needs another.
+    #
+    # You can define additional values between the minimum and maximum values.
+    # Minimum value is 1
+    # Maximum value is 5
+    2: 50
+    random: 0
+    random-low: 0 # random value weighted towards lower values
+    random-high: 0 # random value weighted towards higher values
+    random-range-1-5: 0 # random value between 1 and 5
+
+  start_with_one_sin:
+    # One of your starting abnormalities is always One Sin and Hundreds of Good Deeds, like in the vanilla game.
+    'false': 0
+    'true': 50
+
+  tool_abnormalities:
+    # Number of Tool abnormalities in a full 48 abnormality pool; shorter games get proportionally fewer.
+    # Tools fill a containment unit like any other abnormality but have no E.G.O equipment.
+    #
+    # You can define additional values between the minimum and maximum values.
+    # Minimum value is 0
+    # Maximum value is 17
+    4: 50
+    random: 0
+    random-low: 0 # random value weighted towards lower values
+    random-high: 0 # random value weighted towards higher values
+    random-range-0-17: 0 # random value between 0 and 17
+
+  excluded_abnormalities:
+    # Abnormalities that will never be added to your abnormality pool.
+    []
+
+  priority_abnormalities:
+    # Abnormalities that are always added to your abnormality pool, as long as there is room.
+    []
+
+  extraction_offers:
+    # How many abnormalities from your pool are offered on each extraction day.
+    # When more are available, the ones you received first are offered first.
+    #
+    # You can define additional values between the minimum and maximum values.
+    # Minimum value is 1
+    # Maximum value is 3
+    3: 50
+    random: 0
+    random-low: 0 # random value weighted towards lower values
+    random-high: 0 # random value weighted towards higher values
+    random-range-1-3: 0 # random value between 1 and 3
+
+  #############
+  # Locations #
+  #############
+  observation_checks:
+    # How many observation levels (1-4) of every contained abnormality are location checks.
+    # 
+    # Checks are tied to containment order: "Abnormality #07 - Observation Level 2" is sent when the 7th abnormality
+    # you contained reaches observation level 2, whichever abnormality that is.
+    #
+    # You can define additional values between the minimum and maximum values.
+    # Minimum value is 1
+    # Maximum value is 4
+    4: 50
+    random: 0
+    random-low: 0 # random value weighted towards lower values
+    random-high: 0 # random value weighted towards higher values
+    random-range-1-4: 0 # random value between 1 and 4
+
+  ego_extraction_checks:
+    # How many E.G.O Weapon and E.G.O Suit extractions per contained abnormality are location checks.
+    # 
+    # While an abnormality still has extraction checks left, spending PE boxes on its E.G.O sends a check instead of
+    # creating the equipment. If an abnormality has no weapon or suit, those checks are sent automatically once it
+    # reaches observation level 4. E.G.O equipment is shuffled into the item pool instead (one copy per check).
+    #
+    # You can define additional values between the minimum and maximum values.
+    # Minimum value is 0
+    # Maximum value is 3
+    1: 50
+    random: 0
+    random-low: 0 # random value weighted towards lower values
+    random-high: 0 # random value weighted towards higher values
+    random-range-0-3: 0 # random value between 0 and 3
+
+  ego_gift_checks:
+    # Obtaining the E.G.O Gift of each contained abnormality is a location check.
+    # Gifts are random rewards from work, so this adds a lot of grinding.
+    'false': 50
+    'true': 0
+
+  extraction_after_checks:
+    # What happens when you extract E.G.O from an abnormality that has no extraction checks left.
+    # 
+    # **blocked**: E.G.O can only be obtained from the item pool.
+    # **vanilla**: Extraction works normally once the abnormality's checks are done.
+    blocked: 50
+    vanilla: 0
+
+  #########
+  # Items #
+  #########
+  randomize_research:
+    # Department research (TT2 Protocol, shield bullets, execution bullets, Rabbit Team...) is shuffled into the item
+    # pool. Completing a Sephirah mission sends a check instead of letting you pick a research.
+    'false': 0
+    'true': 50
+
+  start_with_tt2_protocol:
+    # Start with the TT2 Protocol research so the game can be sped up from day 1.
+    'false': 0
+    'true': 50
+
+  randomize_agent_slots:
+    # Every department can only hold a limited number of agents. Additional agent slots for each department are
+    # shuffled into the item pool (up to the vanilla maximum of 5).
+    'false': 0
+    'true': 50
+
+  starting_agent_slots:
+    # How many agent slots every department starts with when agent slots are randomized.
+    #
+    # You can define additional values between the minimum and maximum values.
+    # Minimum value is 1
+    # Maximum value is 4
+    2: 50
+    random: 0
+    random-low: 0 # random value weighted towards lower values
+    random-high: 0 # random value weighted towards higher values
+    random-range-1-4: 0 # random value between 1 and 4
+
+  lob_points_per_item:
+    # How many LOB points one "LOB Points" item gives.
+    #
+    # You can define additional values between the minimum and maximum values.
+    # Minimum value is 1
+    # Maximum value is 20
+    4: 50
+    random: 0
+    random-low: 0 # random value weighted towards lower values
+    random-high: 0 # random value weighted towards higher values
+    random-range-1-20: 0 # random value between 1 and 20
+
+  pe_boxes_per_item:
+    # How many PE boxes one "PE Box Shipment" item gives to a random contained abnormality.
+    #
+    # You can define additional values between the minimum and maximum values.
+    # Minimum value is 5
+    # Maximum value is 200
+    30: 50
+    random: 0
+    random-low: 0 # random value weighted towards lower values
+    random-high: 0 # random value weighted towards higher values
+    random-range-5-200: 0 # random value between 5 and 200
+
+  #########
+  # Logic #
+  #########
+  logic_difficulty:
+    # How much the logic expects you to have before later days are considered reachable.
+    # 
+    # **easy**: Expects plenty of E.G.O, agent slots and bullet research before harder days.
+    # **normal**: Moderate expectations.
+    # **hard**: Only light expectations.
+    # **minimal**: Only the hard requirements (enough abnormalities, required Core Suppressions, mission conditions).
+    easy: 0
+    normal: 50
+    hard: 0
+    minimal: 0
+
+  #########
+  # Traps #
+  #########
+  trap_percentage:
+    # Percentage of filler items that are replaced by traps.
+    #
+    # You can define additional values between the minimum and maximum values.
+    # Minimum value is 0
+    # Maximum value is 100
+    20: 50
+    random: 0
+    random-low: 0 # random value weighted towards lower values
+    random-high: 0 # random value weighted towards higher values
+    random-range-0-100: 0 # random value between 0 and 100
+
+  ordeal_trap_weight:
+    # Weight of Ordeal traps (Dawn, Noon, Dusk and Midnight). An Ordeal trap summons an Ordeal; tiers above what the
+    # current day would normally allow are downgraded.
+    #
+    # You can define additional values between the minimum and maximum values.
+    # Minimum value is 0
+    # Maximum value is 10
+    5: 50
+    random: 0
+    random-low: 0 # random value weighted towards lower values
+    random-high: 0 # random value weighted towards higher values
+    random-range-0-10: 0 # random value between 0 and 10
+
+  breach_trap_weight:
+    # Weight of Abnormality Breach traps, which drop a random abnormality's Qliphoth counter to 0.
+    #
+    # You can define additional values between the minimum and maximum values.
+    # Minimum value is 0
+    # Maximum value is 10
+    5: 50
+    random: 0
+    random-low: 0 # random value weighted towards lower values
+    random-high: 0 # random value weighted towards higher values
+    random-range-0-10: 0 # random value between 0 and 10
+
+  meltdown_trap_weight:
+    # Weight of Qliphoth Meltdown traps, which push the Qliphoth meltdown gauge forward.
+    #
+    # You can define additional values between the minimum and maximum values.
+    # Minimum value is 0
+    # Maximum value is 10
+    3: 50
+    random: 0
+    random-low: 0 # random value weighted towards lower values
+    random-high: 0 # random value weighted towards higher values
+    random-range-0-10: 0 # random value between 0 and 10
+
+  energy_drain_trap_weight:
+    # Weight of Energy Drain traps, which remove 20% of the energy collected today.
+    #
+    # You can define additional values between the minimum and maximum values.
+    # Minimum value is 0
+    # Maximum value is 10
+    3: 50
+    random: 0
+    random-low: 0 # random value weighted towards lower values
+    random-high: 0 # random value weighted towards higher values
+    random-range-0-10: 0 # random value between 0 and 10
+
+  panic_trap_weight:
+    # Weight of Panic traps, which make the agents of one department panic.
+    #
+    # You can define additional values between the minimum and maximum values.
+    # Minimum value is 0
+    # Maximum value is 10
+    2: 50
+    random: 0
+    random-low: 0 # random value weighted towards lower values
+    random-high: 0 # random value weighted towards higher values
+    random-range-0-10: 0 # random value between 0 and 10
+
+  #############
+  # DeathLink #
+  #############
+  death_link:
+    # When you die, everyone who enabled death link dies. Of course, the reverse is true too.
+    'false': 50
+    'true': 0
+
+  death_link_trigger:
+    # When a DeathLink is sent.
+    # 
+    # **day_failure**: When you restart the day or return to a checkpoint after a failure.
+    # **department_wipe**: When every agent of a department is dead.
+    day_failure: 50
+    department_wipe: 0
+
+  death_link_effect:
+    # What happens to you when another player dies.
+    # 
+    # **agent**: A random agent dies.
+    # **breach**: A random abnormality breaches containment.
+    # **ordeal**: An Ordeal fitting the current day appears.
+    agent: 50
+    breach: 0
+    ordeal: 0
+
+  ###########################
+  # Item & Location Options #
+  ###########################
+  local_items:
+    # Forces these items to be in their native world.
+    []
+
+  non_local_items:
+    # Forces these items to be outside their native world.
+    []
+
+  start_inventory:
+    # Start with the specified amount of these items. Example: {Bomb: 1, Arrow: 3}
+    {}
+
+  start_inventory_from_pool:
+    # Start with the specified amount of these items and don't place them in the world. Example: {Bomb: 1, Arrow: 3}
+    # 
+    # The game decides what the replacement items will be.
+    {}
+
+  start_hints:
+    # Start with these item's locations prefilled into the ``!hint`` command.
+    []
+
+  start_location_hints:
+    # Start with these locations and their item prefilled into the ``!hint`` command.
+    []
+
+  exclude_locations:
+    # Prevent these locations from having an important item.
+    []
+
+  priority_locations:
+    # Prevent these locations from having an unimportant item.
+    []
+
+  item_links:
+    # Share part of your item pool with other players.
+    []
+
+  plando_items:
+    # Generic items plando.
+    []

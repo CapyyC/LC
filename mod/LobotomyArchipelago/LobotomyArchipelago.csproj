@@ -1,0 +1,53 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!--
+    Lobotomy Corporation Archipelago mod.
+
+    The game runs on Unity 2017.4 / Mono with the .NET 3.5 profile, so the mod targets net35.
+    Game classes are accessed through reflection, so Assembly-CSharp is not referenced.
+
+    Build against your game files (recommended):
+      dotnet build -c Release -p:GameDir="C:\Program Files (x86)\Steam\steamapps\common\LobotomyCorp\"
+    Without GameDir the bundled UnityEngine reference stub (mod/stubs/UnityEngine) is used instead.
+  -->
+  <PropertyGroup>
+    <TargetFramework>net35</TargetFramework>
+    <AssemblyName>LobotomyArchipelago</AssemblyName>
+    <RootNamespace>LobotomyArchipelago</RootNamespace>
+    <LangVersion>7.3</LangVersion>
+    <Version>0.1.0</Version>
+    <Deterministic>true</Deterministic>
+    <Nullable>disable</Nullable>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <GameDir Condition="'$(GameDir)' == ''"></GameDir>
+    <GameManaged>$(GameDir)LobotomyCorp_Data\Managed\</GameManaged>
+    <UseGameReferences Condition="'$(GameDir)' != '' And Exists('$(GameManaged)UnityEngine.dll')">true</UseGameReferences>
+    <DistDir>$(MSBuildThisFileDirectory)..\..\dist\BaseMods\LobotomyArchipelago\</DistDir>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies.net35" Version="1.0.3" PrivateAssets="all" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(UseGameReferences)' == 'true'">
+    <Reference Include="$(GameManaged)UnityEngine.dll" Private="false" />
+    <Reference Include="$(GameManaged)UnityEngine.CoreModule.dll" Private="false" Condition="Exists('$(GameManaged)UnityEngine.CoreModule.dll')" />
+    <Reference Include="$(GameManaged)UnityEngine.IMGUIModule.dll" Private="false" Condition="Exists('$(GameManaged)UnityEngine.IMGUIModule.dll')" />
+    <Reference Include="$(GameManaged)UnityEngine.InputModule.dll" Private="false" Condition="Exists('$(GameManaged)UnityEngine.InputModule.dll')" />
+    <Reference Include="$(GameManaged)UnityEngine.InputLegacyModule.dll" Private="false" Condition="Exists('$(GameManaged)UnityEngine.InputLegacyModule.dll')" />
+    <Reference Include="$(GameManaged)UnityEngine.TextRenderingModule.dll" Private="false" Condition="Exists('$(GameManaged)UnityEngine.TextRenderingModule.dll')" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(UseGameReferences)' != 'true'">
+    <ProjectReference Include="..\stubs\UnityEngine\UnityEngine.csproj" Private="false" />
+  </ItemGroup>
+
+  <Target Name="CopyToDist" AfterTargets="Build" Condition="'$(Configuration)' == 'Release'">
+    <ItemGroup>
+      <InfoFiles Include="$(MSBuildThisFileDirectory)Info\**\*" />
+    </ItemGroup>
+    <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(DistDir)" />
+    <Copy SourceFiles="@(InfoFiles)" DestinationFiles="@(InfoFiles->'$(DistDir)Info\%(RecursiveDir)%(Filename)%(Extension)')" />
+    <Copy SourceFiles="$(MSBuildThisFileDirectory)research_overrides.example.json" DestinationFolder="$(DistDir)" />
+  </Target>
+</Project>
