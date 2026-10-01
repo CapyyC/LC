@@ -75,6 +75,12 @@ You can also play offline: the mod remembers the last session and sends queued c
 
 ## Troubleshooting
 
+- **Overlay says "Client not running"**: the mod cannot reach the Lobotomy Corporation Client on `127.0.0.1:38269`.
+  Open the Archipelago Launcher and start **Lobotomy Corporation Client** (not the Text Client). If it is missing from
+  the Launcher, the `.apworld` is not installed; install it and restart the Launcher. The client log should say
+  `Waiting for the Lobotomy Corporation mod on 127.0.0.1:38269`; if it says it could not listen on the port instead,
+  start it with another `--port` and put that port into the mod's `config.json`. Once the client runs, the overlay
+  changes to "Client running, not connected to a server" within a few seconds; then `/connect` to the server.
 - The mod writes `LobotomyArchipelago.log` and (F9) `diagnostics.txt` to
   `%USERPROFILE%\AppData\LocalLow\Project_Moon\Lobotomy\Archipelago`.
 - The diagnostics report lists every game hook the mod could attach ("Patches"). Features whose hook is reported as

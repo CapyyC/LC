@@ -72,7 +72,7 @@ namespace LobotomyArchipelago
                         if (info == null || info.Count < 3) continue;
                         int resolved = ItemApplier.ResolveResearch(long.Parse(entry.Key, CultureInfo.InvariantCulture),
                             (int)JsonExt.ToLong(info[0]), (int)JsonExt.ToLong(info[1]), Convert.ToString(info[2],
-                                CultureInfo.InvariantCulture));
+                                CultureInfo.InvariantCulture), info.Count >= 4 ? (int)JsonExt.ToLong(info[3], -1) : -1);
                         builder.Append("  ").Append(info[2]).Append(" -> ").Append(resolved).Append('\n');
                     }
                 }

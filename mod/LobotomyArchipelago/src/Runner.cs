@@ -284,7 +284,8 @@ namespace LobotomyArchipelago
             builder.Append("<b>Archipelago</b> (F8 hide, F9 diagnostics)\n");
             if (bridge == null || !bridge.Connected)
             {
-                builder.Append("<color=#ff8080>Client not running</color> - start the Lobotomy Corporation Client\n");
+                builder.Append("<color=#ff8080>Client not running</color> - start the Lobotomy Corporation Client ")
+                    .Append("(looking for it on 127.0.0.1:").Append(Plugin.Port).Append(")\n");
             }
             else if (!session.ServerConnected)
             {

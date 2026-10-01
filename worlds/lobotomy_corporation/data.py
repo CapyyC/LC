@@ -232,7 +232,7 @@ RESEARCH: list[Research] = [
     Research(30, "Regenerator Mk2", 3, 0, "facility"),
     Research(31, "Mental Corruption Neutralizing Gas", 3, 1, "facility"),
     Research(32, "Regenerator Distinguisher Modification", 3, 2, "facility"),
-    Research(20, "Supply Educational Manuals", 2, 0, "facility"),
+    Research(20, "Supply Education Manuals", 2, 0, "facility"),
     Research(21, "Improve Work Education", 2, 1, "facility"),
     Research(22, "Improve Hiring Procedures", 2, 2, "facility"),
     Research(40, "Physical Intervention Shield Bullet", 4, 0, "bullet"),
@@ -245,7 +245,7 @@ RESEARCH: list[Research] = [
     Research(71, "SP-E Bullet", 7, 1, "bullet"),
     Research(72, "HP & SP Bullet Refining", 7, 2, "bullet"),
     Research(80, "E.G.O Restoration", 8, 0, "facility"),
-    Research(81, "Re-extraction", 8, 1, "facility"),
+    Research(81, "Re-Extraction", 8, 1, "facility"),
     Research(82, "Gift Division", 8, 2, "facility"),
     Research(90, "Limit Break: The Virtue of Protection", 9, 0, "facility"),
     Research(91, "Limit Break: The Virtue of Governance", 9, 1, "facility"),
@@ -260,10 +260,23 @@ RESEARCH_GAME_NAMES: dict[str, str] = {
     "Erosion Shield Bullet": "Erosion Shield",
     "Execution Bullet": "Execution Bullets",
     "Qliphoth Intervention Field Bullet": "Qliphoth Intervention Field",
-    "Rabbit Team Protocol": "Rabbit Team",
+    "Rabbit Team Protocol": "The Rabbit Team",
     "HP-N Bullet": "HP-N Bullets",
     "SP-E Bullet": "SP-E Bullets",
-    "E.G.O Restoration": "E.G.O. Restoration",
+}
+
+# Research ids of the game (from the mod's F9 diagnostics report on game version 1.0.2.13f1).
+RESEARCH_GAME_IDS: dict[str, int] = {
+    "TT2 Protocol": 1, "Joint Command": 2, "Assembly Summons": 103,
+    "G.O Visualization": 3, "Damage Normalization": 4, "Abnormality Countermeasures Manual": 5,
+    "Supply Education Manuals": 8, "Improve Work Education": 9, "Improve Hiring Procedures": 10,
+    "Regenerator Mk2": 6, "Mental Corruption Neutralizing Gas": 7, "Regenerator Distinguisher Modification": 203,
+    "Physical Intervention Shield Bullet": 501, "Trauma Shield Bullet": 502, "Erosion Shield Bullet": 503,
+    "Execution Bullet": 701, "Qliphoth Intervention Field Bullet": 702, "Rabbit Team Protocol": 703,
+    "HP-N Bullet": 801, "SP-E Bullet": 802, "HP & SP Bullet Refining": 803,
+    "E.G.O Restoration": 901, "Re-Extraction": 902, "Gift Division": 903,
+    "Limit Break: The Virtue of Protection": 1001, "Limit Break: The Virtue of Governance": 1002,
+    "Limit Break: The Virtue of Creation": 1003,
 }
 
 SHIELD_BULLETS = ["Physical Intervention Shield Bullet", "Trauma Shield Bullet", "Erosion Shield Bullet"]

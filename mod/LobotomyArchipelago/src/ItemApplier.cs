@@ -49,7 +49,8 @@ namespace LobotomyArchipelago
                 int sefira = (int)JsonExt.ToLong(info[0]);
                 int slot = (int)JsonExt.ToLong(info[1]);
                 string name = Convert.ToString(info[2], CultureInfo.InvariantCulture);
-                int researchId = ResolveResearch(itemId, sefira, slot, name);
+                int knownId = info.Count >= 4 ? (int)JsonExt.ToLong(info[3], -1) : -1;
+                int researchId = ResolveResearch(itemId, sefira, slot, name, knownId);
                 if (researchId < 0) continue;
                 if (GameApi.UpgradedResearchIds(sefira).Contains(researchId)) continue;
                 if (GameApi.UpgradeResearch(researchId))
@@ -60,10 +61,10 @@ namespace LobotomyArchipelago
         }
 
         /// <summary>
-        /// Finds the game's research id for an item: first by (English) name, then by position in the department's
-        /// research list. Results can be overridden with research_overrides.json in the mod folder.
+        /// Finds the game's research id for an item: the id sent by the apworld, then the (English) name, then the
+        /// position in the department's research list. research_overrides.json in the mod folder takes precedence.
         /// </summary>
-        public static int ResolveResearch(long itemId, int sefira, int slot, string name)
+        public static int ResolveResearch(long itemId, int sefira, int slot, string name, int knownId = -1)
         {
             int cached;
             if (ResolvedResearch.TryGetValue(itemId, out cached)) return cached;
@@ -78,11 +79,16 @@ namespace LobotomyArchipelago
             foreach (object research in list)
             {
                 int id = GameApi.ResearchId(research);
-                if (id >= 0 && id < 1000) candidates.Add(research);
+                if (id >= 0) candidates.Add(research);
             }
             int result = -1;
             foreach (object research in candidates)
             {
+                if (knownId >= 0 && GameApi.ResearchId(research) == knownId) result = knownId;
+            }
+            foreach (object research in candidates)
+            {
+                if (result >= 0) break;
                 if (string.Equals(GameApi.ResearchName(research).Trim(), name, StringComparison.OrdinalIgnoreCase))
                 {
                     result = GameApi.ResearchId(research);

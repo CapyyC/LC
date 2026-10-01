@@ -315,6 +315,7 @@ public class SefiraManager
     {
         new Sefira { sefiraEnum = SefiraEnum.MALKUT, indexString = "1", name = "Control" },
         new Sefira { sefiraEnum = SefiraEnum.YESOD, indexString = "4", name = "Information" },
+        new Sefira { sefiraEnum = SefiraEnum.CHOKHMAH, indexString = "10", name = "Record" },
     };
 
     public Sefira GetSefira(SefiraEnum sefira) { return sefiras.FirstOrDefault(s => s.sefiraEnum == sefira); }
@@ -365,6 +366,10 @@ public class ResearchDataModel
             new ResearchItemModel { info = new ResearchItemTypeInfo { id = 1, name = "TT2 Protocol" } },
             new ResearchItemModel { info = new ResearchItemTypeInfo { id = 2, name = "Joint Command" } },
             new ResearchItemModel { info = new ResearchItemTypeInfo { id = 101, name = "Assembly Summons" } } } },
+        { "10", new List<ResearchItemModel> {
+            new ResearchItemModel { info = new ResearchItemTypeInfo { id = 1001, name = "Limit Break: The Virtue of Protection" } },
+            new ResearchItemModel { info = new ResearchItemTypeInfo { id = 1002, name = "Limit Break: The Virtue of Governance" } },
+            new ResearchItemModel { info = new ResearchItemTypeInfo { id = 1003, name = "Limit Break: The Virtue of Creation" } } } },
         { "5", new List<ResearchItemModel> {
             new ResearchItemModel { info = new ResearchItemTypeInfo { id = 401, name = "Physical Intervention Shield" } },
             new ResearchItemModel { info = new ResearchItemTypeInfo { id = 402, name = "Trauma Shield" } },

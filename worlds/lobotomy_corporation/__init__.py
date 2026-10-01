@@ -22,6 +22,7 @@ from .data import (
     MAX_CONTAINMENT,
     MISSIONS,
     RESEARCH,
+    RESEARCH_GAME_IDS,
     RESEARCH_GAME_NAMES,
     SAFE_STARTERS,
     SUPPRESSION_LAYERS,
@@ -514,7 +515,8 @@ class LobotomyCorporationWorld(World):
         research = {}
         for entry in RESEARCH:
             research[str(item_name_to_id[entry.name])] = [entry.sefira, entry.slot,
-                                                          RESEARCH_GAME_NAMES.get(entry.name, entry.name)]
+                                                          RESEARCH_GAME_NAMES.get(entry.name, entry.name),
+                                                          RESEARCH_GAME_IDS[entry.name]]
         agent_slot_items = {}
         for dept in DEPARTMENTS:
             agent_slot_items[str(item_name_to_id[agent_slot_item_name(dept)])] = dept.sefira

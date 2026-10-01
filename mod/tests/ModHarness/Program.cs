@@ -170,6 +170,7 @@ internal static class Program
             {
                 [(Base + 3_000_000 + 0).ToString()] = new object[] { 0, 0, "TT2 Protocol" },
                 [(Base + 3_000_000 + 40).ToString()] = new object[] { 4, 0, "Physical Intervention Shield" },
+                [(Base + 3_000_000 + 92).ToString()] = new object[] { 9, 2, "Limit Break: The Virtue of Creation", 1003 },
             },
             ["randomize_agent_slots"] = true, ["starting_agent_slots"] = 2,
             ["agent_slot_items"] = new Dictionary<string, object> { [(Base + 4_000_000).ToString()] = 0 },
@@ -195,6 +196,7 @@ internal static class Program
                 Item(Base + 100009, "One Sin and Hundreds of Good Deeds"),
                 Item(Base + 100012, "Spider Bud"),
                 Item(Base + 3_000_000 + 0, "TT2 Protocol"),
+                Item(Base + 3_000_000 + 92, "Limit Break: The Virtue of Creation"),
                 Item(Base + 1_000_000 + 100009, "Penitence (E.G.O Weapon)"),
                 Item(Base + 5_000_000 + 1, "LOB Points"),
                 Item(Base + 4_000_000 + 0, "Control Team Agent Slot"),
@@ -215,6 +217,8 @@ internal static class Program
         Check(InventoryModel.Instance.equipList.Count(e => e.metaInfo.id == 200009) == 1,
             "E.G.O weapon item added to the inventory");
         Check(ResearchDataModel.instance.GetModelBySefira("1")[0].curLevel == 1, "TT2 Protocol research unlocked");
+        Check(ResearchDataModel.instance.GetModelBySefira("10")[2].curLevel == 1,
+            "Hokma research with an id above 1000 unlocked");
 
         // ----- Extraction offers only received abnormalities -----
         var generator = new CreatureGenerate.CreatureGenerateModel();

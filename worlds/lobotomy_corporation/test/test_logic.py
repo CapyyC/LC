@@ -110,3 +110,27 @@ class TestHardNoTools(LobotomyCorporationTestBase):
 
     def test_no_tools(self) -> None:
         self.assertFalse(any(abno.tool for abno in self.world.pool_abnormalities))
+
+
+class TestResearchData(LobotomyCorporationTestBase):
+    run_default_tests = False
+
+    def test_research_matches_game(self) -> None:
+        """Names and ids as listed by the mod's diagnostics report in the real game."""
+        from ..data import RESEARCH, RESEARCH_GAME_IDS, RESEARCH_GAME_NAMES
+        game_names = {
+            "TT2 Protocol", "Joint Command", "Assembly Summons", "G.O Visualization", "Damage Normalization",
+            "Abnormality Countermeasures Manual", "Supply Education Manuals", "Improve Work Education",
+            "Improve Hiring Procedures", "Regenerator Mk2", "Mental Corruption Neutralizing Gas",
+            "Regenerator Distinguisher Modification", "Physical Intervention Shield", "Trauma Shield", "Erosion Shield",
+            "Execution Bullets", "Qliphoth Intervention Field", "The Rabbit Team", "HP-N Bullets", "SP-E Bullets",
+            "HP & SP Bullet Refining", "E.G.O Restoration", "Re-Extraction", "Gift Division",
+            "Limit Break: The Virtue of Protection", "Limit Break: The Virtue of Governance",
+            "Limit Break: The Virtue of Creation",
+        }
+        self.assertEqual({RESEARCH_GAME_NAMES.get(r.name, r.name) for r in RESEARCH}, game_names)
+        self.assertEqual(set(RESEARCH_GAME_IDS), {r.name for r in RESEARCH})
+        # Inside each department the slot order is the order of the game ids.
+        for sefira in {r.sefira for r in RESEARCH}:
+            ordered = sorted((r for r in RESEARCH if r.sefira == sefira), key=lambda r: RESEARCH_GAME_IDS[r.name])
+            self.assertEqual([r.slot for r in ordered], [0, 1, 2])
